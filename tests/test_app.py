@@ -90,6 +90,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertIn('maximum_width = 720', large)
         self.assertIn('own_window_argb_value = 0', small)
         self.assertIn('own_window_transparent = true', small)
+        self.assertIn('border_width = 0', small)
 
     def test_runtime_directory_is_private_and_symlinks_are_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
