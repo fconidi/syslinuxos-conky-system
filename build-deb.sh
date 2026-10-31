@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 PKG_NAME=syslinuxos-conky-system
-PKG_VERSION=0.1.0
+PKG_VERSION=0.1.1
 WORKDIR="$(cd "$(dirname "$0")" && pwd)"
 OUTPUT="${1:-$WORKDIR/dist}"
 mkdir -p "$OUTPUT"
@@ -26,7 +26,7 @@ Version: $PKG_VERSION
 Section: x11
 Priority: optional
 Architecture: all
-Depends: conky-all, python3 (>= 3.10), fonts-dejavu-core, iproute2, syslinuxos-conky-menu (>= 0.1.1)
+Depends: conky-all, python3 (>= 3.10), ca-certificates, fonts-dejavu-core, iproute2, syslinuxos-conky-menu (>= 0.1.1)
 Recommends: x11-xserver-utils, x11-utils
 Maintainer: Franco Conidi <fconidi@gmail.com>
 Homepage: https://github.com/fconidi/syslinuxos-conky-system

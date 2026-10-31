@@ -112,6 +112,27 @@ class ConfigurationTests(unittest.TestCase):
                         self.assertEqual(app.control('start'), 0)
                         spawn.assert_not_called()
 
+class PublicInformationTests(unittest.TestCase):
+    def test_public_ip_is_validated(self):
+        with patch.object(app, 'fetch_url', return_value='198.51.100.12\n'):
+            self.assertEqual(app.public_ip(), '198.51.100.12')
+        for value in ['not an address', '${exec false}', '']:
+            with patch.object(app, 'fetch_url', return_value=value):
+                self.assertEqual(app.public_ip(), 'N/A')
+
+    def test_provider_name_is_safe_for_display(self):
+        with patch.object(app, 'fetch_url', return_value='AS1234 Example ${exec false} ISP\n'):
+            name = app.isp_name()
+        self.assertNotIn('${', name)
+        self.assertNotIn('\n', name)
+        self.assertNotIn('AS1234', name)
+        self.assertLessEqual(len(name), 32)
+
+    def test_network_timeout_has_a_readable_fallback(self):
+        with patch.object(app, 'urlopen', side_effect=TimeoutError):
+            self.assertEqual(app.public_ip(), 'N/A')
+            self.assertEqual(app.isp_name(), 'N/A')
+
 
 if __name__ == '__main__':
     unittest.main()

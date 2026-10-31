@@ -3,6 +3,7 @@
 
 import argparse
 import fcntl
+import ipaddress
 import json
 import math
 import os
@@ -13,6 +14,7 @@ import shlex
 import signal
 import subprocess
 import time
+from urllib.request import Request, urlopen
 
 PROC = Path('/proc')
 TEMPLATE = Path('/etc/conky/conky-system.conf')
@@ -49,7 +51,29 @@ def layout(width, height, override=None):
         pass
     scale = max(0.5, min(scale, 3.0))
     return {'font': max(6.0, round(10 * scale, 2)), 'width': max(216, round(360 * scale)),
-            'gap_x': 0, 'gap_y': round(30 * scale)}
+            'gap_x': 0, 'gap_y': 0}
+
+
+def fetch_url(url):
+    try:
+        request = Request(url, headers={'User-Agent': 'Conky-System/0.1.1'})
+        with urlopen(request, timeout=3) as response:
+            return response.read(512).decode('utf-8', errors='replace').strip()
+    except (OSError, ValueError):
+        return ''
+
+
+def public_ip():
+    try:
+        return str(ipaddress.IPv4Address(fetch_url('https://api.ipify.org').strip()))
+    except ValueError:
+        return 'N/A'
+
+
+def isp_name():
+    text = re.sub(r'^AS\d+\s+', '', fetch_url('https://ipinfo.io/org'))
+    text = ''.join(char for char in text if char.isprintable() and char not in '$\\{}')
+    return text[:32].strip() or 'N/A'
 
 
 def network_text():
@@ -160,11 +184,14 @@ def control(action):
 
 def main():
     parser = argparse.ArgumentParser(description='Start or stop the Conky-System desktop monitor.')
-    parser.add_argument('action', choices=['start', 'stop', 'status', 'network'])
+    parser.add_argument('action', choices=['start', 'stop', 'status', 'network', 'public-ip', 'isp'])
     arguments = parser.parse_args()
     try:
         if arguments.action == 'network':
             print(network_text())
+            return 0
+        if arguments.action in ['public-ip', 'isp']:
+            print(public_ip() if arguments.action == 'public-ip' else isp_name())
             return 0
         return control(arguments.action)
     except (OSError, RuntimeError) as error:
