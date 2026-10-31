@@ -1,0 +1,9 @@
+# Changelog
+
+## 0.1.0
+
+- Add the Conky-System tree layout with a transparent background and SysLinuxOS colors.
+- Scale font size, dimensions, spacing and placement to the active monitor.
+- Display system, memory, storage, process and network information.
+- Follow the active default network route automatically.
+- Add start and stop entries to the shared Conky submenu.
