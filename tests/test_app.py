@@ -21,6 +21,10 @@ class LayoutTests(unittest.TestCase):
         self.assertGreater(app.layout(3840, 2160)['font'], app.layout(1920, 1080)['font'])
         self.assertGreater(app.layout(1920, 1080)['width'], app.layout(1280, 720)['width'])
 
+    def test_position_uses_the_same_right_edge_as_conky_window(self):
+        for width, height in [(800, 600), (1280, 720), (1920, 1080), (3840, 2160)]:
+            self.assertEqual(app.layout(width, height)['gap_x'], 0)
+
     def test_invalid_scale_does_not_break_the_layout(self):
         expected = app.layout(1920, 1080)
         for value in ['nan', 'inf', '-1', '0', 'invalid']:

@@ -42,7 +42,7 @@ conky-system status
 
 Font size, width, spacing and position scale automatically to the active
 primary monitor. Restart Conky-System after changing the monitor resolution.
-Its default position leaves room for Conky Window on the right.
+Its top-right position is the same as Conky Window. Use the two themes as alternatives.
 
 Set a scale manually or select a network interface:
 

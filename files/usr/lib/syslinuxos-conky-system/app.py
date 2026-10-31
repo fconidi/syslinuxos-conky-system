@@ -49,7 +49,7 @@ def layout(width, height, override=None):
         pass
     scale = max(0.5, min(scale, 3.0))
     return {'font': max(6.0, round(10 * scale, 2)), 'width': max(216, round(360 * scale)),
-            'gap_x': round(360 * scale), 'gap_y': round(30 * scale)}
+            'gap_x': 0, 'gap_y': round(30 * scale)}
 
 
 def network_text():
