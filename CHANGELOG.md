@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Keep Start and Stop Conky-System menu labels consistent in every locale.
+
 ## 0.1.1
 
 - Display section headings in white for better contrast.

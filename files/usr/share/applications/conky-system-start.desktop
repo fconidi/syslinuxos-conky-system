@@ -1,7 +1,6 @@
 [Desktop Entry]
 Type=Application
 Name=Start Conky-System
-Name[it]=Avvia Conky-System
 Exec=conky-system start
 StartupNotify=false
 Terminal=false

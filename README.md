@@ -30,7 +30,7 @@ icon. It must also be available when installing a downloaded package.
 ## Use
 
 Open **System Tools > Conky > Start Conky-System** or **Stop Conky-System**.
-Italian menu entries are **Avvia Conky-System** and **Ferma Conky-System**.
+The same menu labels are shown in every locale.
 
 The same controls are available in a terminal:
 

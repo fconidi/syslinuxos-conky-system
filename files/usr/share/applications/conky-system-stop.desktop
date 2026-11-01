@@ -1,7 +1,6 @@
 [Desktop Entry]
 Type=Application
 Name=Stop Conky-System
-Name[it]=Ferma Conky-System
 Exec=conky-system stop
 StartupNotify=false
 Terminal=false
