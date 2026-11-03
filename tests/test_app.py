@@ -70,7 +70,7 @@ class ProcessTests(unittest.TestCase):
             with patch.object(app, 'PROC', root):
                 (process / 'cmdline').write_bytes(b'conky\0-c\0conkyrc\0')
                 self.assertFalse(app.owned_process(123, config))
-                (process / 'cmdline').write_bytes(b'conky\0--config\0/tmp/conky-window-scaled.conf\0')
+                (process / 'cmdline').write_bytes(b'conky\0--config\0/tmp/conky-system-four-scaled.conf\0')
                 self.assertFalse(app.owned_process(123, config))
                 (process / 'cmdline').write_bytes(b'conky\0--config\0' + os.fsencode(config) + b'\0')
                 self.assertTrue(app.owned_process(123, config))
