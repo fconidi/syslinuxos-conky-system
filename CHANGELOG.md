@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Use the same azure as the other SysLinuxOS Conky themes.
+
 ## 0.1.2
 
 - Keep Start and Stop Conky-System menu labels consistent in every locale.
